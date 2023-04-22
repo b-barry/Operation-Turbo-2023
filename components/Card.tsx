@@ -196,7 +196,7 @@ const Card: React.FC<CardProps> = ({
               upcoming
             </p>
           ) : null}
-          <Link
+          <LinkLite
             target="_blank"
             title={title}
             rel="noopener noreferrer"
@@ -207,7 +207,7 @@ const Card: React.FC<CardProps> = ({
             ) : (
               <div className="w-full rounded-lg bg-white bg-opacity-10 p-3"></div>
             )}
-          </Link>
+          </LinkLite>
           {description ? (
             descriptionTag
           ) : (
