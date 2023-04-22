@@ -1,5 +1,5 @@
 import { ComponentProps } from './uniform.type';
-import { asDay, asMonth, asYear } from '../../lib/helpers';
+import { asDay, asMonth, asYear } from './helpers';
 import { useStore } from '@builder.io/mitosis';
 
 type CardProps = ComponentProps<{

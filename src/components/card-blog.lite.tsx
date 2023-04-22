@@ -2,7 +2,7 @@ import { Show, useStore } from '@builder.io/mitosis';
 import CardImageLite from './card-image.lite';
 import LinkLite from './link.lite';
 import CardTitleLite from './card-title.lite';
-import { asDay, asMonth, asYear } from '../../lib/helpers';
+import { asDay, asMonth, asYear } from './helpers';
 
 export default function CardBlogLite(props: {
   component: { variant?: string };

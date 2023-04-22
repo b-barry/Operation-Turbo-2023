@@ -5,7 +5,7 @@ import LinkLite from './link.lite';
 import CardTitleLite from './card-title.lite';
 import CardDescriptionLite from './card-description.lite';
 import CardBlogLite from './card-blog.lite';
-import { isDateBeforeToday } from '../../lib/helpers';
+import { isDateBeforeToday } from './helpers';
 import CardDateLite from './card-date.lite';
 
 type CardProps = ComponentProps<{

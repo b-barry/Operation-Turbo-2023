@@ -1,10 +1,7 @@
-import { For, Show, useStore } from '@builder.io/mitosis';
-import { useRouterPath } from './router';
+import {For, Show, useStore} from '@builder.io/mitosis';
+import {useRouterPath} from './router';
 import LinkAnchor from './link.lite';
-import Icon from './icon.lite';
-import CldImage from './cld-image.lite';
-import Link from 'next/link';
-import Logo from '@/components/logo';
+import Logo from './logo.lite';
 import React from 'react';
 
 type NavLinkLite = {

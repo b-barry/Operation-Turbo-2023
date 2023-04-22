@@ -7,8 +7,8 @@ import {
 } from "@uniformdev/canvas-react";
 
 import "./canvasComponents";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../mitosis-output/react/src/client/src/components/header";
+import Footer from "../mitosis-output/react/src/client/src/components/footer";
 import { CldOgImage } from "next-cloudinary";
 import { useRouter } from "next/router";
 

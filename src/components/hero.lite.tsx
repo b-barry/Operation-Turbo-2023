@@ -1,8 +1,8 @@
 import {Show} from '@builder.io/mitosis';
-import {Image} from '../../lib/types';
 import {ComponentProps} from './uniform.type';
 import CldImage from './cld-image.lite';
 import UniformSlot from './slot-uniform.lite';
+import {Image} from "./types";
 
 type HeroProps = ComponentProps<{
   image: Image[];
