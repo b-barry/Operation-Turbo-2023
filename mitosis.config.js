@@ -109,8 +109,8 @@ module.exports = {
   overridesDir: './overrides',
   dest: './mitosis-output',
   targets: [
-    'react',
-    'rsc',
+    // 'react',
+    // 'rsc',
     'vue3',
     // 'reactNative',
     // 'vue2',

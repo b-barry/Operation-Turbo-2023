@@ -1,34 +1,49 @@
-import { registerUniformComponent } from "@uniformdev/canvas-react";
+import {DefaultNotImplementedComponent,} from '@uniformdev/canvas-vue'
 
-import Hero from "../mitosis-output/react/src/client/src/components/hero";
-import Cta from "../mitosis-output/react/src/client/src/components/cta";
-import Title from "../mitosis-output/react/src/client/src/components/title";
-import RichText from "../mitosis-output/react/src/client/src/components/rich-text";
-import TwoColumn from "../mitosis-output/react/src/client/src/components/two-column";
-import List from "../mitosis-output/react/src/client/src/components/list"
-import Card from "../mitosis-output/react/src/client/src/components/card"
-import Container from "../mitosis-output/react/src/client/src/components/container"
-import StandAloneImage from "../mitosis-output/react/src/client/src/components/standalone-image"
+import Hero from '../mitosis-output/vue/src/components/hero'
+import Cta from '../mitosis-output/vue/src/components/cta'
+import Title from '../mitosis-output/vue/src/components/title'
+import RichText from '../mitosis-output/vue/src/components/rich-text'
+import TwoColumn from '../mitosis-output/vue/src/components/two-column'
+import List from '../mitosis-output/vue/src/components/list'
+import Card from '../mitosis-output/vue/src/components/card'
+import Container from '../mitosis-output/vue/src/components/container'
+import StandAloneImage from '../mitosis-output/vue/src/components/standalone-image'
+import {ComponentInstance} from 'vue'
 
-registerUniformComponent({ type: "hero", component: Hero });
-registerUniformComponent({ type: "twoColumn", component: TwoColumn });
-registerUniformComponent({ type: "cta", component: Cta });
-registerUniformComponent({ type: "standAloneImage", component: StandAloneImage });
+type UniformComponent = {
+  type: string | string[]
+  variantId?: string
+  component: any
+}
+const components: UniformComponent[] = [
+  { type: 'hero', component: Hero },
+  { type: 'twoColumn', component: TwoColumn },
+  { type: 'cta', component: Cta },
+  { type: 'standAloneImage', component: StandAloneImage },
 
-registerUniformComponent({ type: "container", component: Container })
-registerUniformComponent({ type: "container", variantId: "fullWidth", component: Container })
+  { type: 'container', component: Container },
+  { type: 'container', variantId: 'fullWidth', component: Container },
 
-registerUniformComponent({ type: "list", component: List });
-registerUniformComponent({ type: "list", variantId: "grid", component: List });
-registerUniformComponent({ type: "list", variantId: "list", component: List });
+  { type: 'list', component: List },
+  { type: 'list', variantId: 'grid', component: List },
+  { type: 'list', variantId: 'list', component: List },
 
-registerUniformComponent({ type: "card", component: Card });
-registerUniformComponent({ type: "card", variantId: "small", component: Card });
+  { type: 'card', component: Card },
+  { type: 'card', variantId: 'small', component: Card },
 
-registerUniformComponent({ type: "title", component: Title });
-registerUniformComponent({ type: "title", variantId: "small", component: Title });
-registerUniformComponent({ type: "title", variantId: "medium", component: Title });
-registerUniformComponent({ type: "title", variantId: "large", component: Title });
+  { type: 'title', component: Title },
+  { type: 'title', variantId: 'small', component: Title },
+  { type: 'title', variantId: 'medium', component: Title },
+  { type: 'title', variantId: 'large', component: Title },
 
-registerUniformComponent({ type: "richText", component: RichText });
-registerUniformComponent({ type: "richText", variantId: "addedSpace", component: RichText });
+  { type: 'richText', component: RichText },
+  { type: 'richText', variantId: 'addedSpace', component: RichText },
+]
+
+export function resolveRenderer(componentInstance: ComponentInstance) {
+  return (
+    components.find((c) => c.type === componentInstance.type)?.component ??
+    DefaultNotImplementedComponent
+  )
+}

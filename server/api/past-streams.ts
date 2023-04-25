@@ -1,11 +1,11 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { toVideo } from "../../lib/helpers"
+import {toVideo} from "../../lib/helpers"
+import {defineEventHandler, getQuery, H3Event} from "h3";
 
-async function fetchAllVideos(id, count, order) {
+async function fetchAllStreams(id, count, order) {
   let allData = [];
   let morePagesAvailable = true;
   let pageToken = false;
-  let url = `https://www.googleapis.com/youtube/v3/search?part=snippet,id&channelId=${id}&key=${process.env.YOUTUBE_KEY}&order=${order || "date"}&maxResults=${count || 3}`
+  let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${id}&key=${process.env.YOUTUBE_KEY}&eventType=completed&type=video&maxResults=${count || 3}&order=${order || "date"}`
 
   while (morePagesAvailable) {
     if (pageToken) {
@@ -33,19 +33,20 @@ async function fetchAllVideos(id, count, order) {
   return allData;
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { id, count, order } = req.query
 
-  const data: any = await fetchAllVideos(id, count, order)
+
+export default defineEventHandler(async (event: H3Event) => {
+  const { id, count, order } = getQuery(event)
+
+  const data: any = await fetchAllStreams(id, count, order)
 
   let response;
   if (data.error) {
     response = data.error
   }
   else {
-    const videos = data.map(video => (toVideo(video, false))).filter(video => video.videoId).filter(video => !video.title.includes('#shorts'))
+    const videos = data.map(video => (toVideo(video, false)))
     response = { meta: { amount: videos.length, order }, result: videos }
   }
-
-  res.status(response.code || 200).json(response)
-}
+  return response
+})

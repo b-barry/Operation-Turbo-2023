@@ -2,10 +2,12 @@
 
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
-module.exports = {
+console.log("Tailwind@@@@")
+export default {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{vue,js,ts,jsx,tsx}",
+    "./mitosis-output/**/*.{vue,js,ts,jsx,tsx}",
+    "./components/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {

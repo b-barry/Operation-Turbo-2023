@@ -17,11 +17,10 @@ export default function ListLite(props: ListProps) {
           : 'list'
       }`}
     >
-      <UniformSlot name="title" emptyPlaceholder={<div className="h-12" />} />
+      <UniformSlot name="title"  />
 
       <UniformSlot
         name="description"
-        emptyPlaceholder={<div className="h-12" />}
       />
       <div
         className={`mt-4 grid ${props.moreSpace ? 'gap-12' : 'gap-4'} 
@@ -33,7 +32,7 @@ export default function ListLite(props: ListProps) {
           : 'grid-cols-1'
       }`}
       >
-        <UniformSlot name="list" emptyPlaceholder={<div className="h-12" />} />
+        <UniformSlot name="list"  />
       </div>
     </div>
   );
