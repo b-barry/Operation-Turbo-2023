@@ -3,10 +3,9 @@ import {defineEventHandler, getQuery, H3Event} from 'h3'
 
 export default defineEventHandler(async (event: H3Event) => {
   const { id } = getQuery(event)
-  const data = await fetch(
+  const result = await $fetch(
     `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${id}&key=${process.env.YOUTUBE_KEY}&eventType=upcoming&type=video`
   )
-  const result = await data.json()
 
   let response
   if (result.error) {

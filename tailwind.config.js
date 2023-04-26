@@ -2,7 +2,6 @@
 
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
-console.log("Tailwind@@@@")
 export default {
   content: [
     "./pages/**/*.{vue,js,ts,jsx,tsx}",
@@ -12,7 +11,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-lato)", ...fontFamily.sans],
+        sans: ["Lato", ...fontFamily.sans],
       },
       lineHeight: {
         title: "1.36",

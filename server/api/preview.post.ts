@@ -1,22 +1,12 @@
-import {defineEventHandler, H3Event, readBody} from 'h3';
-import {enhance} from '@uniformdev/canvas';
-import {enhancerBuilder} from "~/lib/uniform/enhancers";
-
+import { defineEventHandler, H3Event, readBody } from 'h3'
+import { enhance } from '@uniformdev/canvas'
+import runEnhancers, { enhancerBuilder } from '~/lib/uniform/enhancers'
 
 export default defineEventHandler(async (event: H3Event) => {
-    const body = await readBody(event);
-    const composition = body.composition;
+  const body = await readBody(event)
+  const composition = body.composition
 
+  await runEnhancers(composition)
 
-    await enhance({
-        composition,
-        enhancers: enhancerBuilder,
-        context: {
-          preview:true
-        },
-    });
-
-    return { composition };
-});
-
-
+  return { composition }
+})

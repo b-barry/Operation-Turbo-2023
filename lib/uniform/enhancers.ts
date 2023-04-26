@@ -12,10 +12,10 @@ export const enhancerBuilder = new EnhancerBuilder()
   );
 
 export default async function runEnhancers(composition) {
-  // await enhance({
-  //   composition,
-  //   enhancers: enhancerBuilder,
-  //   context: { preview: true },
-  // })
+  await enhance({
+    composition,
+    enhancers: enhancerBuilder,
+    context: { preview: true },
+  })
   return composition
 }

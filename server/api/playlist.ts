@@ -3,13 +3,12 @@ import { defineEventHandler, getQuery, H3Event } from 'h3'
 
 export default defineEventHandler(async (event: H3Event) => {
   const { id, count } = getQuery(event)
-  const data = await fetch(
+  const result = await $fetch(
     `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${id}&key=${
       process.env.YOUTUBE_KEY
     }&maxResults=${count || 5}`
   )
 
-  const result = await data.json()
   let response
 
   if (result.error) {

@@ -21,7 +21,7 @@ export default function RichTextLite(props: RichTextProps) {
         className={`rich-text text-xl mb-4 ${
           props.component.variant ? 'p-8' : 'p-0'
         }`}
-        dangerouslySetInnerHTML={state.html}
+        innerHTML={props.content?.rteValue}
       />
     </Show>
   );

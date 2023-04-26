@@ -40,6 +40,7 @@
     "nuxt": "^3.4.2"
   },
   "devDependencies": {
+    "@nuxtjs/google-fonts": "^3.0.0",
     "@nuxtjs/plausible": "^0.2.0",
     "@nuxtjs/tailwindcss": "^5.3.3",
     "@types/node": "^18",

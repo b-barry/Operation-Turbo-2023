@@ -11,13 +11,13 @@ type CardProps = ComponentProps<{
 
 export default function CardDateLite(props: CardProps) {
   const state = useStore({
-    get day() {
+    get dayValue() {
       return props.day || asDay(props.date);
     },
-    get month() {
+    get monthValue() {
       return props.month || asMonth(props.date);
     },
-    get year() {
+    get yearValue() {
       return props.year || asYear(props.date);
     },
   });
@@ -35,11 +35,11 @@ export default function CardDateLite(props: CardProps) {
         font-black
       "
         >
-          <span className="block leading-none text-4xl pb-1">{state.day}</span>
+          <span className="block leading-none text-4xl pb-1">{state.dayValue}</span>
           <span className="block leading-none text-lg pb-1 uppercase">
-            {state.month}
+            {state.monthValue}
           </span>
-          <span className="block leading-none text-lg pb-1">{state.year}</span>
+          <span className="block leading-none text-lg pb-1">{state.yearValue}</span>
         </div>
       </div>
     </div>

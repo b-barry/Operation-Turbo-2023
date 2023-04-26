@@ -2,13 +2,11 @@ import {defineEventHandler, getQuery, H3Event} from 'h3'
 
 export default defineEventHandler(async (event: H3Event) => {
   const { username, per_page, collection_id } = getQuery(event)
-  const data = await fetch(
+  const result = await $fetch(
     `https://dev.to/api/articles?username=${username}&state=all${
       collection_id ? `&collection_id=${collection_id}` : ''
     }`
   )
-
-  const result = await data.json()
 
   const articles = result.map((article) => {
     return {

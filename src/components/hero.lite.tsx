@@ -1,17 +1,23 @@
-import { Show } from '@builder.io/mitosis'
+import {Show, useStore} from '@builder.io/mitosis'
 import { ComponentProps } from './uniform.type'
 import CldImage from './cld-image.lite'
 import UniformSlotLite from './slot-uniform.lite'
 import { Image } from './types'
+import {TARGET} from "../constants/target";
 
 type HeroProps = ComponentProps<{
-  image: Image[]
+  image: Image
   copyLocation: 'left' | 'right'
   verticalAlignment: 'top' | 'middle' | 'bottom'
   textAlignment: 'left' | 'center' | 'right'
   spaceBelow: boolean
 }>
 export default function HeroLite(props: HeroProps) {
+  const state=useStore({
+    get sizes(){
+      return TARGET==='react' ? '100vw' : 'sm:100vw md:100vw lg:100vw xl:100vw xxl:100vw 2xl:100vw'
+    }
+  })
   return (
     <div
       className={`hero relative md:aspect-[1400/600] overflow-hidden mt-20 md:mt-auto ${
@@ -19,23 +25,23 @@ export default function HeroLite(props: HeroProps) {
       } `}
     >
       <Show
-        when={props.image && props.image[0]?.publicId}
-        else={
-          <div className="w-full h-full absolute top-0 left-0">
-            <div className="w-full h-full rounded-lg bg-white bg-opacity-10" />
-          </div>
-        }
+          when={props.image && props.image?.src}
+          else={
+            <div className="w-full h-full absolute top-0 left-0">
+              <div className="w-full h-full rounded-lg bg-white bg-opacity-10" />
+            </div>
+          }
       >
         <div className="aspect-[1400/600] md:aspect-auto">
           <CldImage
-            width={props.image[0]?.width}
-            height={props.image[0]?.height}
-            src={props.image[0]?.publicId}
-            alt={props.image[0]?.alt || ''}
-            rawTransformations={[props.image[0]?.transformation]}
-            loading="eager"
-            sizes="100vw"
-            className="static md:absolute left-0 top-0 object-cover aspect-[1400/600]"
+              width={props.image?.width}
+              height={props.image?.height}
+              src={props.image?.src}
+              alt={props.image?.alt || ''}
+              rawTransformations={[props.image?.transformation]}
+              loading="eager"
+              sizes={state.sizes}
+              className="static md:absolute left-0 top-0 object-cover aspect-[1400/600]"
           />
         </div>
       </Show>

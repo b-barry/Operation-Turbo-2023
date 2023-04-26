@@ -14,7 +14,7 @@ async function fetchAllVideos(id, count, order) {
       url = `${url}&pageToken=${pageToken}`
     }
 
-    const response = await fetch(url)
+    const response = await $fetch(url)
     let { items, nextPageToken, error } = await response.json()
 
     if (error) {

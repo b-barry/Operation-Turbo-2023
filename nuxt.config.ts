@@ -17,31 +17,34 @@ export default defineNuxtConfig({
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/google-fonts',
     '@uniformdev/uniform-nuxt',
     '@nuxtjs/plausible',
     '@nuxt/image-edge',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
   ],
+  image: {
+    domains: [
+      'i.ytimg.com',
+      'ytimg.com',
+      'res.cloudinary.com',
+      'cloudinary.com',
+      'amazonaws.com',
+      's3.amazonaws.com',
+      'dev-to-uploads.s3.amazonaws.com',
+    ],
+  },
   runtimeConfig: {
     public: {
       uniformApikey: process.env.UNIFORM_API_KEY || null,
       uniformProjectId: process.env.UNIFORM_PROJECT_ID || null,
       uniformApiHost: process.env.UNIFORM_CLI_BASE_URL || null,
+      uniformProjectMapId: process.env.UNIFORM_PROJECT_MAP_ID || null,
     },
     // storyblokToken:process.env.STORYBLOK_TOKEN || null
   },
@@ -59,7 +62,13 @@ export default defineNuxtConfig({
   plausible: {
     domain: 'timbenniks.dev',
   },
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  googleFonts: {
+    subsets: 'latin',
+    useStylesheet:true,
+    preconnect:true,
+    preload:true,
+    families: {
+      Lato: [400, 700],
+    },
+  },
 })
