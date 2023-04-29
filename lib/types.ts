@@ -1,4 +1,4 @@
-import * as Contentful from 'contentful';
+import type * as Contentful from 'contentful';
 
 export type Talk = {
   slug: Contentful.EntryFields.Text,

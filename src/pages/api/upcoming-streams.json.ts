@@ -1,8 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { toVideo } from "../../lib/helpers"
+import {toVideo} from "../../../lib/helpers"
+import type {APIContext} from 'astro'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { id } = req.query
+export default async function get({ url }: APIContext) {
+  const id = url.searchParams.get('id')
   const data = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${id}&key=${process.env.YOUTUBE_KEY}&eventType=upcoming&type=video`)
   const result = await data.json()
 
@@ -15,5 +15,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     response = { meta: { amount: videos.length }, result: videos }
   }
 
-  res.status(response.code || 200).json(response)
-}
+  return {
+    body: JSON.stringify(response),
+  }}

@@ -1,0 +1,49 @@
+---
+import Header from "../../mitosis-output/react/src/client/src/components/header";
+import Footer from "../../mitosis-output/react/src/client/src/components/footer";
+import {createUniformApiEnhancer} from "@uniformdev/canvas-react";
+import runEnhancers from "../../lib/uniform/enhancers";
+import Layout from '../layouts/Layout.astro';
+import {canvasClient, getNavigationItems} from "../../lib/uniform/canvasClient";
+import {CANVAS_DRAFT_STATE, CANVAS_PUBLISHED_STATE, enhance, localize} from "@uniformdev/canvas";
+import {UniformComposition, UniformSlot} from "@uniformdev/canvas-react";
+const { slug:slugString } = Astro.params;
+const preview=true;
+const  projectMapId  = import.meta.env.UNIFORM_PROJECT_MAP_ID
+const locale =  'en-US';
+const { composition } = await canvasClient.getCompositionByNodePath({
+    projectMapNodePath: slugString ? `/${slugString}` : '/',
+    state:
+        process.env.NODE_ENV === 'development' || preview
+            ? CANVAS_DRAFT_STATE
+            : CANVAS_PUBLISHED_STATE,
+    projectMapId: projectMapId,
+    unstable_resolveData: true,
+});
+await localize({ composition, locale });
+await runEnhancers(composition)
+const nodes = await getNavigationItems();
+const variant = composition?.variant || false;
+const { title, description, image } = composition?.parameters || {};
+// TODO handle contextualEditingEnhancer
+console.log("compositions",)
+---
+
+<Layout title={title} description={description} image={image}>
+    <!-- <Header nodes={nodes} client:load  />
+       <main className={`${variant ? "mt-32" : ""}`}>
+           <UniformComposition
+                   data={composition}
+                   contextualEditingEnhancer={contextualEditingEnhancer}
+                   behaviorTracking="onLoad"
+                   client:load
+           >
+               <UniformSlot name="components" client:load />
+           </UniformComposition>
+       </main>
+       <Footer nodes={nodes} client:load  /> -->
+</Layout>
+
+<style>
+
+</style>

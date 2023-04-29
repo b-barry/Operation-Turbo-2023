@@ -1,10 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { createClient } from "contentful";
-import type { Talk } from "../../lib/types"
-import { toTalk } from "../../lib/helpers"
+import {createClient} from "contentful";
+import type {Talk} from "../../../lib/types"
+import {toTalk} from "../../../lib/helpers"
+import type {APIContext} from 'astro'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { count } = req.query
+export default async function get({ url }: APIContext) {
+  const count = url.searchParams.get('count')
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
     environment: process.env.CONTENTFUL_ENVIRONMENT,
@@ -21,5 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   const result = entries.items.map((item) => (toTalk(item.fields)));
-  res.status(200).json({ meta: { amount: result.length }, result })
+  return {
+    body: JSON.stringify({ meta: { amount: result.length }, result }),
+  }
 }

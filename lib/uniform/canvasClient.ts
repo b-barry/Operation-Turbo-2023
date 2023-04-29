@@ -1,31 +1,22 @@
-import {
-  CanvasClient,
-  CANVAS_DRAFT_STATE,
-  CANVAS_PUBLISHED_STATE,
-} from "@uniformdev/canvas";
+import {CANVAS_DRAFT_STATE, CANVAS_PUBLISHED_STATE, CanvasClient,} from "@uniformdev/canvas";
 import runEnhancers from "./enhancers";
-import getConfig from "next/config";
-import { ProjectMapClient } from '@uniformdev/project-map';
+import {ProjectMapClient} from '@uniformdev/project-map';
 
-const {
-  serverRuntimeConfig: { apiKey, apiHost, projectId },
-} = getConfig();
 
 export const canvasClient = new CanvasClient({
-  apiKey,
-  apiHost,
-  projectId,
+  apiKey:import.meta.env.UNIFORM_API_KEY,
+  apiHost:import.meta.env.UNIFORM_CLI_BASE_URL,
+  projectId:import.meta.env.UNIFORM_PROJECT_ID,
 });
 
 export const projectMapClient = new ProjectMapClient({
-  apiKey,
-  apiHost,
-  projectId,
+  apiKey:import.meta.env.UNIFORM_API_KEY,
+  apiHost:import.meta.env.UNIFORM_CLI_BASE_URL,
+  projectId:import.meta.env.UNIFORM_PROJECT_ID,
 });
 
 export async function getNavigationItems() {
-  const { serverRuntimeConfig } = getConfig();
-  const { projectMapId } = serverRuntimeConfig
+  const  projectMapId  = import.meta.env.UNIFORM_PROJECT_MAP_ID
 
   const { nodes } = await projectMapClient.getNodes({
     projectMapId
@@ -40,8 +31,7 @@ export async function getNavigationItems() {
 }
 
 export async function getCompositionBySlug(slug: string, preview: boolean) {
-  const { serverRuntimeConfig } = getConfig();
-  const { projectMapId } = serverRuntimeConfig
+  const  projectMapId  = import.meta.env.UNIFORM_PROJECT_MAP_ID
 
   const { composition } = await canvasClient
     .getCompositionByNodePath({

@@ -1,6 +1,8 @@
-import NextLink from 'next/link';
 
 
-export type Link = typeof NextLink;
 
-export default NextLink;
+export default function ({children, ...props}){
+    return <a {...props}>
+        {children}
+    </a>
+};

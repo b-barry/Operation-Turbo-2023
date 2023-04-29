@@ -1,10 +1,12 @@
 <template>
-  <NuxtLink :to="href">
+  <a :to="href">
     <slot />
-  </NuxtLink>
+  </a>
 </template>
 
 <script setup lang="ts">
+import {toRefs} from "vue";
+
 export interface LinkProps {
   href: string;
 }
