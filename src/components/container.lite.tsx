@@ -11,7 +11,7 @@ type ContainerProps = ComponentProps<{
 }>;
 export default function ContainerLite(props: ContainerProps) {
   const state = useStore({
-    get background() {
+    get backgroundStyle() {
       return { background: props.background ? props.background : '#0F223E' };
     },
     get className() {
@@ -23,7 +23,7 @@ export default function ContainerLite(props: ContainerProps) {
     },
   });
   return (
-    <div style={state.background} className={state.className}>
+    <div style={state.backgroundStyle} className={state.className}>
       <div className="max-w-[1400px] mx-auto">
         <UniformSlot name="content" />
       </div>

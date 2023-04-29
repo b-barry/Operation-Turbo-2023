@@ -21,7 +21,7 @@ export default function CardBlogLite(props: {
       }`;
     },
 
-    get year() {
+    get yearValue() {
       return props.year || asYear(props.date);
     },
   });
@@ -79,7 +79,7 @@ export default function CardBlogLite(props: {
         </LinkLite>
         <Show when={props.component.variant}>
           <p className="title flowing-title">
-            {state.dayAndMonth} {state.year}
+            {state.dayAndMonth} {state.yearValue}
           </p>
         </Show>
       </div>

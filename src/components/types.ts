@@ -12,6 +12,7 @@ export type Talk = {
 export type Image = {
   alt: string;
   url: string;
+  src: string;
   ratio: string;
   width: number;
   format: string;
